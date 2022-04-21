@@ -1,10 +1,10 @@
-pragma solidity ^0.4.17;
+pragma solidity >=0.8.10;
 
 contract Lottery {
     address public manager;
     address[] public players;
 
-    function Lottery() public {
+     () public {
         manager = msg.sender;
     }
 
@@ -15,7 +15,8 @@ contract Lottery {
     }
 
     function random() private view returns (uint) {
-        return uint(keccak256(block.difficulty, now, players));
+        return uint(keccak256(abi.encodePacked(block.difficulty,now,players)));
+
     }
 
     function pickWinner() public restricted {
